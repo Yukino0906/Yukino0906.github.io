@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UART scan insertion &amp; ATPG — Henan Wang</title>
+<meta name="description" content="Synthesis-flow and DFT contributions within the AFTx07 test-engineering team, evaluated on a UART block with four scan chains and 62 patterns."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Design for test · Digital implementation</p><h1>Scan insertion and ATPG for a UART block</h1><p class="project-deck">Synthesis-flow and DFT contributions within the AFTx07 test-engineering team, evaluated on a UART block with four scan chains and 62 patterns.</p><div class="project-meta"><span>Purdue SoCET · Test engineering team</span><span>Team project · January–May 2025</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>99.18%</strong><span>Reported stuck-at test coverage on the UART block</span></div></aside><article class="prose"><h2 id="overview">A UART demonstration of the DFT flow</h2>
+
+<p>Within the SoCET AFTx07 test-engineering team, I contributed to a flow that connects RTL synthesis, scan insertion, and stuck-at automatic test pattern generation (ATPG). The supplied presentation evaluates the flow on a <strong>UART block</strong>.</p>
+<p>The objective was to establish a netlist and test flow, insert scan circuitry, check the integration, and generate test patterns. The reported block-level results provide evidence for that workflow; extending the flow across the larger design appears among the presentation’s next steps.</p>
+<figure><a href="../../assets/dft-flow.png" target="_blank" rel="noopener"><img src="../../assets/dft-flow.png" alt="Team presentation slide showing synthesis, scan insertion, and ATPG design steps" loading="lazy"></a><figcaption>The team’s synthesis-to-ATPG flow, reproduced from the DFT presentation.</figcaption></figure>
+
+<h2 id="contribution">My contribution within the team</h2>
+
+<p>My work included customization of the Synopsys Fusion Compiler synthesis flow for the UART RTL, including constraints, optimization, technology mapping, and gate-level netlist export. I also contributed to scan insertion and the stuck-at ATPG workflow.</p>
+<p>The scan work covers configuration, replacement, reordering, and stitching. The presentation reports four scan chains and no violations in the illustrated DFT design-rule checks. The ATPG stage then generates patterns and reports fault classifications and test coverage.</p>
+<figure><a href="../../assets/dft-scan-insertion.png" target="_blank" rel="noopener"><img src="../../assets/dft-scan-insertion.png" alt="Source presentation comparing UART netlist connectivity before and after scan insertion" loading="lazy"></a><figcaption>Scan insertion before and after, from the team presentation. The netlist views show the change in scan connectivity behind the configuration, replacement, reordering, and stitching steps.</figcaption></figure>
+
+<p>This was a collaborative project with Seongwon Hong, Raghav Srivaths, Benjamin Ryu, and Milen Manoj, mentored by Dr. Mark Johnson and Abinands Ramshanker. The reported coverage is a team result for the evaluated UART block.</p>
+<figure><a href="../../assets/dft-scan-checks.png" target="_blank" rel="noopener"><img src="../../assets/dft-scan-checks.png" alt="Team slide reporting four scan chains and a prescan DFT rule-check summary with no violations" loading="lazy"></a><figcaption>Scan configuration and the illustrated DFT rule-check report. This is evidence for test-flow checks on the UART demonstration, distinct from the subsequent ATPG coverage result.</figcaption></figure>
+
+<p>The rule checks and ATPG report serve different purposes: the former checks compatibility with the test protocol, while the latter measures how the generated patterns exercise the fault model. Keeping both makes the path from netlist preparation to coverage visible.</p>
+<h2 id="results">Scan and ATPG results</h2>
+
+<table>
+<thead>
+<tr>
+<th>Reported measure</th>
+<th align="right">Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scan chains</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td>Reported DFT DRC violations</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Generated scan patterns</td>
+<td align="right">62</td>
+</tr>
+<tr>
+<td>Stuck-at test coverage</td>
+<td align="right">99.18%</td>
+</tr>
+<tr>
+<td>Detected faults</td>
+<td align="right">2,295</td>
+</tr>
+<tr>
+<td>Undetectable faults</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td>ATPG-untestable faults</td>
+<td align="right">19</td>
+</tr>
+</tbody></table>
+<figure><a href="../../assets/dft-atpg-results.png" target="_blank" rel="noopener"><img src="../../assets/dft-atpg-results.png" alt="ATPG tool report showing 99.18 percent test coverage, 62 scan patterns, and the fault-class counts" loading="lazy"></a><figcaption>The original tool report labels 99.18% as test coverage. The summary contains 2,318 total faults, including four classified as undetectable.</figcaption></figure>
+
+<p>The documented next steps were to extend DFT integration across the design, optimize the scan-chain configuration, and consider on-chip clock control and test compression if needed.</p>
+<h2 id="resources">Team presentation</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/blob/main/Test%20Engineering%20-%20DFT/Test_Engineering_PPT.pdf">View the DFT presentation (PDF) on GitHub ↗</a></p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

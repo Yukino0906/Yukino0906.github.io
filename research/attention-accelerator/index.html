@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fixed-point attention accelerator — Henan Wang</title>
+<meta name="description" content="A signed-int8 attention datapath with reciprocal-based normalization, SRAM integration, and an RTL-to-GDSII implementation."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Digital design · Near-memory computing</p><h1>A fixed-point attention accelerator, through layout</h1><p class="project-deck">A signed-int8 attention datapath with reciprocal-based normalization, SRAM integration, and an RTL-to-GDSII implementation.</p><div class="project-meta"><span>Chips and AI Hackathon · Solo project</span><span>Ongoing project · Since July 2026</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>577 → 205</strong><span>Attention latency in cycles after normalization optimization</span></div></aside><article class="prose"><h2 id="overview">The design question</h2>
+
+<p>How can a fixed-point attention datapath reduce arithmetic and memory overhead while preserving bit-accurate behavior through physical implementation?</p>
+<p>For the Chips and AI Hackathon, I designed a synthesizable signed-int8 scaled dot-product attention accelerator. The project covers arithmetic building blocks, matrix multiplication, a systolic array, QKᵀ, a lookup-table exponential, fixed-point normalization, and the probability–value (PV) datapath.</p>
+<p>I developed the project independently, including optimization, verification, hard-memory integration, and the RTL-to-GDSII implementation in TSMC N40.</p>
+<figure><a href="../../assets/attention-layout.png" target="_blank" rel="noopener"><img class="layout-figure" src="../../assets/attention-layout.png" alt="Final physical layout of the attention accelerator, including the hard-memory macro and surrounding logic" loading="lazy"></a><figcaption>The attention macro’s physical layout, from the project portfolio. Select the image to inspect the original at full size.</figcaption></figure>
+
+<h2 id="contribution">My contribution</h2>
+
+<h3>Fixed-point arithmetic and verification</h3>
+<p>I designed the datapath and replaced 16 sequential probability divisions with four row-wise reciprocal operations, followed by multiply-and-round normalization. This reduced attention latency from <strong>577 to 205 cycles</strong>, a <strong>2.81× speedup</strong>, while preserving bit-accurate fixed-point behavior across <strong>216 RTL and post-layout gate-level simulation test cases</strong>.</p>
+<h3>Memory integration and dataflow</h3>
+<p>I integrated a <strong>16 × 64-bit dual-port hard-memory macro</strong> and redesigned the memory-to-compute dataflow with dual-bank ping-pong buffering. This eliminated a 48-cycle serial feed and reduced the steady-state task interval from <strong>329 to 213 cycles</strong>, a <strong>1.54× improvement</strong>.</p>
+<h3>Physical implementation</h3>
+<p>I completed the TSMC N40 RTL-to-GDSII flow and checked timing in Tempus. At <strong>100 MHz</strong>, the reported setup and hold slack were <strong>+0.046 ns</strong> and <strong>+0.030 ns</strong>, respectively.</p>
+<h3>Inspecting the task schedule</h3>
+<figure><a href="../../assets/attention-task-waveform.png" target="_blank" rel="noopener"><img src="../../assets/attention-task-waveform.png" alt="Simulation waveform showing task acceptance, memory-bank state, compute activity, and output handshakes" loading="lazy"></a><figcaption>The existing portfolio waveform marks successive task acceptances 213 cycles apart. The host, memory-bank, compute, and output signals make the scheduling result inspectable; open the figure for the full-resolution annotations.</figcaption></figure>
+
+<p>This waveform connects the throughput claim to the control sequence: task acceptance must coordinate with memory ownership, compute activity, and result readout. The marked interval is a scheduling measure, distinct from the 205-cycle attention latency.</p>
+<h2 id="results">Results & validation</h2>
+
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th align="right">Before</th>
+<th align="right">After</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Attention latency, normalization optimization</td>
+<td align="right">577 cycles</td>
+<td align="right">205 cycles</td>
+</tr>
+<tr>
+<td>Steady-state task interval, memory/dataflow optimization</td>
+<td align="right">329 cycles</td>
+<td align="right">213 cycles</td>
+</tr>
+</tbody></table>
+<p>The two improvements measure different aspects of the design. The first concerns the latency of the attention calculation after arithmetic optimization. The second concerns the interval between tasks after the memory and buffering changes; the speedup factors should not be multiplied together.</p>
+<div class="result-note"><p>Validation includes RTL simulation, post-layout gate-level simulation, and static timing analysis. The reported results describe the design and physical implementation, not measured silicon performance.</p></div>
+
+<p>This project complements my emerging-device research with experience in digital arithmetic, verification, and the constraints of physical implementation. It also makes memory access and compute scheduling explicit parts of the design, rather than treating the arithmetic datapath in isolation.</p>
+<h2 id="resources">Project materials</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/tree/HEAD/Near%20memory%20attention%20head%20macro">View the presentation, waveforms, and physical-design figures on GitHub ↗</a></p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/bias-dac/">Programmable bias-voltage DAC <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

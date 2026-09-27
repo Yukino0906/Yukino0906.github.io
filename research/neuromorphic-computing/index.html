@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Device-aware neuromorphic computing — Henan Wang</title>
+<meta name="description" content="Crossbar simulations that connect measured memristor nonidealities to synaptic updates and neural-network accuracy."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Device modeling · Neuromorphic computing</p><h1>Bringing measured device behavior into computing</h1><p class="project-deck">Crossbar simulations that connect measured memristor nonidealities to synaptic updates and neural-network accuracy.</p><div class="project-meta"><span>Wang’s Thin Film Group · Purdue University</span><span>Related manuscript under major revision</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>92.7%</strong><span>MNIST accuracy in device-aware simulation</span></div></aside><article class="prose"><h2 id="overview">The research question</h2>
+
+<p>How do the measured nonidealities of a memristor affect a neural network that uses conductance states as synaptic weights?</p>
+<p>An idealized weight update does not capture the asymmetry, variability, and history dependence of a physical device. I built a device-aware crossbar simulation for a dual-mode memristor to connect measured pulse behavior with network-level performance. The work uses differential-pair synapses and write verification to evaluate computation under a model informed by the device.</p>
+<p>This is the computing component of the dual-mode memristor research in Wang’s Thin Film Group. It is related to, but distinct from, the Au–CeO₂ compact-model and programming project.</p>
+<div class="method-flow" aria-label="Modeling workflow"><span>Measured<br>pulse data</span><b aria-hidden="true">→</b><span>Device<br>nonidealities</span><b aria-hidden="true">→</b><span>Differential-pair<br>synapses</span><b aria-hidden="true">→</b><span>Crossbar<br>simulation</span></div>
+
+<h2 id="contribution">My contribution</h2>
+
+<p>I built the device-aware simulation and extracted parameters from raw pulse data. My focus was the connection between experimental behavior and the assumptions used to represent synapses in computation.</p>
+<ul>
+<li><strong>Pulse-data analysis.</strong> I extracted update nonlinearity and the number of steps associated with polarity reversal, alongside cycle-to-cycle and device-to-device variation.</li>
+<li><strong>Nonideality modeling.</strong> I incorporated measured characteristics relevant to write/read noise and retention into the device-aware simulation.</li>
+<li><strong>Synapse representation.</strong> I used write-verified differential pairs to represent synaptic weights and evaluated their network-level performance against a software baseline.</li>
+</ul>
+<p>These choices make the device model part of the computational experiment. The resulting accuracy reflects the modeled device behavior and synapse implementation, rather than only the capacity of the neural network.</p>
+<figure><a href="../../assets/neuro-differential-pair.svg" target="_blank" rel="noopener"><img src="../../assets/neuro-differential-pair.svg" alt="Generic differential-pair representation of a signed synaptic weight" loading="lazy"></a><figcaption>Conceptual illustration of the differential-pair representation. Two nonnegative conductances encode a signed weight through their difference; device updates affect the resulting effective weight.</figcaption></figure>
+
+<h2 id="results">Network-level results</h2>
+
+<p>The device-aware simulation reached <strong>92.7% MNIST accuracy</strong>, compared with a <strong>96.2% software baseline</strong>: a difference of 3.5 percentage points.</p>
+<figure><a href="../../assets/neuro-accuracy-comparison.svg" target="_blank" rel="noopener"><img src="../../assets/neuro-accuracy-comparison.svg" alt="Bar comparison of 96.2 percent software and 92.7 percent device-aware accuracy" loading="lazy"></a><figcaption>Visual summary of the two accuracy values reported above, on a common 0–100% scale. The difference is an aggregate comparison; it does not isolate the contribution of any individual device nonideality.</figcaption></figure>
+
+<div class="result-note"><p>These are simulation results informed by measured device data. They describe the modeled crossbar and synapse configuration; they are not measurements from a fabricated inference chip.</p></div>
+
+<p>The comparison connects materials and device research to a system-level question: how much computational performance remains when the model accounts for the device’s nonideal behavior? It also provides a way to evaluate the implications of programming and synapse choices before committing to a physical array implementation.</p>
+<h2 id="resources">Related research</h2>
+
+<p><strong>Related manuscript:</strong> Z. Lin*, Henan Wang*, et al., “Realizing Dual-Mode Memristor Based on Ni₀.₈Fe₀.₂-BTO/BTO/Ni₀.₈Fe₀.₂-BTO Tri-layer Vertically Aligned Nanocomposites,” <em>Small</em>, under major revision. *Co-first authors.</p>
+<p><a href="../../files/Henan_Wang_CV.pdf">Research background and results in my CV (PDF)</a></p>
+<p><a href="../rram-programming/">Explore the related RRAM programming project</a></p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a><a href="../../research/bias-dac/">Programmable bias-voltage DAC <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

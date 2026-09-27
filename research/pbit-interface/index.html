@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MTJ p-bit interface circuits — Henan Wang</title>
+<meta name="description" content="Circuit-level contributions to an ongoing collaborative project, focusing on selection circuitry, output restoration, and process-corner simulation."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">MTJ p-bits · Mixed-signal circuits</p><h1>Local interface circuits for MTJ p-bits</h1><p class="project-deck">Circuit-level contributions to an ongoing collaborative project, focusing on selection circuitry, output restoration, and process-corner simulation.</p><div class="project-meta"><span>NanoX Lab · Contributing researcher</span><span>Ongoing collaborative research</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>5 corners</strong><span>Output transient traces: nominal, FF, SS, FS, and SF</span></div></aside><article class="prose"><h2 id="overview">Circuit-level focus</h2>
+
+<p>My contribution to an ongoing MTJ p-bit project includes local circuitry for signal selection and output restoration. The work connects transistor-level circuit design to the interface requirements of a collaborative mixed-signal research effort.</p>
+<p>This page presents a local circuit schematic and its simulated output response. I am a contributing researcher on the project, with responsibility for specific circuit and verification tasks.</p>
+<h2 id="contribution">My contribution</h2>
+
+<p>I worked on MUX and inverter circuitry for selecting signals and restoring their outputs for CMOS logic, alongside the project’s modeling and mixed-signal verification work. The examples here focus on the schematic and transient-simulation portions of that contribution.</p>
+<figure><a href="../../assets/pbit-local-circuit.png" target="_blank" rel="noopener"><img src="../../assets/pbit-local-circuit.png" alt="Local selection and output-restoration circuit schematic" loading="lazy"></a><figcaption>A local transistor-level circuit used in the interface work. The figure shows the supplied circuit excerpt, including its output buffering and load.</figcaption></figure>
+
+<p>The circuit work involves checking signal propagation through the local selection/restoration path and examining its output under the available process-corner models. The scope of these checks is the local interface circuit.</p>
+<h2 id="results">Process-corner transient simulation</h2>
+
+<p>The supplied transient plot overlays the output response for <strong>nominal, FF, SS, FS, and SF</strong> process corners. The traces show switching between approximately 0 V and 1.8 V, with visible differences around the rising and falling transitions.</p>
+<figure><a href="../../assets/pbit-corner-response.png" target="_blank" rel="noopener"><img src="../../assets/pbit-corner-response.png" alt="Output transient simulation at nominal, FF, SS, FS, and SF process corners" loading="lazy"></a><figcaption>Local-circuit output transient across five process corners. These are simulation traces; this figure does not establish a quantitative delay specification or a full temperature-and-supply sweep.</figcaption></figure>
+
+<figure><a href="../../assets/pbit-corner-reading-guide.svg" target="_blank" rel="noopener"><img src="../../assets/pbit-corner-reading-guide.svg" alt="Guide to inspecting logic levels and edge spread in the five supplied corner traces" loading="lazy"></a><figcaption>Reading guide for the local-circuit waveform: compare output levels and the spread around both transitions. This is an explanatory diagram, not an additional simulation result.</figcaption></figure>
+
+<p>The useful comparison is whether the output levels and transitions remain consistent across the shown process models. The cropped trace supports a qualitative inspection; extracting propagation delay would require a time scale and corresponding input reference.</p>
+<p>These results document local circuit behavior during design and verification. The research project remains in progress.</p>
+<h2 id="resources">Selected circuit figures</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/tree/main/MTJ%20p-bit%20Local%20Circuits">View the local circuit schematic and transient plot on GitHub ↗</a></p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

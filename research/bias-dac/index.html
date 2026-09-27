@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Programmable bias-voltage DAC — Henan Wang</title>
+<meta name="description" content="Behavioral modeling, a 3-bit charge-redistribution prototype, and separate transmission-gate experiments for a programmable bias circuit."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Analog design · Programmable bias</p><h1>Developing a programmable bias-voltage DAC</h1><p class="project-deck">Behavioral modeling, a 3-bit charge-redistribution prototype, and separate transmission-gate experiments for a programmable bias circuit.</p><div class="project-meta"><span>Purdue Senior Design · Circuit design</span><span>Ongoing · Block-level simulation</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>499.996 mV</strong><span>Simulated output for code 100 against a 500 mV target</span></div></aside><article class="prose"><h2 id="overview">Programmable bias generation</h2>
+
+<p>I am developing a programmable bias-voltage DAC in Cadence Virtuoso for adjustment of the operating point of a collaborator-designed ΣΔ modulator. The design work progresses from behavioral transfer-function models to charge redistribution and transistor-level switching experiments.</p>
+<p>The current notes document a <strong>3-bit charge-redistribution prototype</strong> and <strong>standalone CMOS transmission-gate tests</strong>. Earlier notes include a 4-bit behavioral transfer model and background reading on cryogenic bias DACs; these are separate from the current 3-bit circuit prototype.</p>
+<h2 id="contribution">My contribution</h2>
+
+<p>I built behavioral models to examine offset, gain error, and linearity, then implemented a binary-weighted charge-redistribution DAC. The Week 5 circuit replaces ideal capacitors with n65 capacitor cells while retaining ideal switching elements for this initial DAC check.</p>
+<figure><a href="../../assets/dac-schematic.png" target="_blank" rel="noopener"><img src="../../assets/dac-schematic.png" alt="Three-bit charge-redistribution DAC with a binary-weighted n65 capacitor array" loading="lazy"></a><figcaption>The capacitor-array prototype from the September 26 design notes. This stage evaluates the DAC using ideal switching elements.</figcaption></figure>
+
+<p>In parallel, I designed and simulated a CMOS transmission gate, comparing transistor sizes and examining how the switch charges a capacitor load. The work also investigates the voltage step associated with turning the switch off.</p>
+<h2 id="results">Current block-level checks</h2>
+
+<h3>Charge-redistribution DAC</h3>
+<p>For code <strong>100</strong>, the simulated output is <strong>499.996 mV</strong> against a <strong>500 mV target</strong>. This is a single-code check of the current capacitor-array prototype; it does not establish full-code accuracy for a completed DAC with transistor switches.</p>
+<figure><a href="../../assets/dac-output.png" target="_blank" rel="noopener"><img src="../../assets/dac-output.png" alt="Simulated DAC transient response settling near 0.5 volts for code 100" loading="lazy"></a><figcaption>DAC output transient from the Week 5 notes. The accompanying cursor readout reports 499.996 mV.</figcaption></figure>
+
+<h3>Transmission-gate experiment</h3>
+<p>The standalone test compares a small-device configuration with a larger <strong>1 µm NMOS / 2 µm PMOS</strong> configuration at <strong>60 nm channel length</strong>. The larger devices improve the illustrated settling behavior. A separate hold experiment shows an approximately <strong>3.2 mV</strong> turn-off voltage step.</p>
+<figure><a href="../../assets/dac-turnoff.png" target="_blank" rel="noopener"><img src="../../assets/dac-turnoff.png" alt="Held-node waveform showing a small positive voltage step when the transmission gate turns off" loading="lazy"></a><figcaption>Turn-off step in the standalone switch test. The plot supports examination of switching nonidealities; it is not a final DAC error specification.</figcaption></figure>
+
+<figure><a href="../../assets/dac-tg-testbench.png" target="_blank" rel="noopener"><img src="../../assets/dac-tg-testbench.png" alt="Standalone transistor transmission-gate testbench with a capacitor hold load" loading="lazy"></a><figcaption>Standalone hold-test setup from the DAC notebook. The capacitor load makes charge transfer during tracking and the voltage step at switch turn-off observable.</figcaption></figure>
+
+<figure><a href="../../assets/dac-switch-settling.png" target="_blank" rel="noopener"><img src="../../assets/dac-switch-settling.png" alt="Input and held-node transient for the larger transmission-gate device configuration" loading="lazy"></a><figcaption>Tracking transient for the larger-device experiment in the notes. This illustrates the role of switch sizing in charging the load; it is separate from the ideal-switch DAC output check.</figcaption></figure>
+
+<p>These tests separate two design concerns: how quickly the load follows the input while the switch is on, and how much its voltage changes when the switch opens. Both need to be considered when replacing the prototype’s ideal switches.</p>
+<p>The project remains at block-level design and simulation. Integrating the nonideal switches into the DAC and evaluating the resulting behavior are subsequent steps.</p>
+<h2 id="resources">Design notes</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/blob/main/Programmable%20Bias%20Voltage%20DAC/Bias%20Voltge%20DAC.pdf">View the bias DAC design notes (PDF) on GitHub ↗</a></p>
+<p>The notebook includes reference literature alongside my own modeling and circuit-design notes. Results reproduced from that literature are background material, not results of this prototype.</p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RRAM modeling &amp; programming — Henan Wang</title>
+<meta name="description" content="Measurement-calibrated compact models and programming strategies that account for nonlinear switching and post-write relaxation."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Emerging devices · Compact modeling</p><h1>Making memristor programming predictable</h1><p class="project-deck">Measurement-calibrated compact models and programming strategies that account for nonlinear switching and post-write relaxation.</p><div class="project-meta"><span>Wang’s Thin Film Group · Purdue University</span><span>Manuscript in preparation</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>22% → 94%</strong><span>Targeting success within ±0.05 decade on the evaluated cell</span></div></aside><article class="prose"><h2 id="overview">The research question</h2>
+
+<p>How can a programming algorithm reach a target conductance when a memristor’s response depends on its current state, pulse history, and relaxation after the write?</p>
+<p>In Au–CeO₂ vertically aligned nanocomposite (VAN) devices, gradual conductance tuning provides a route to multilevel operation. However, a pulse that appears successful at the first read can leave a different state after relaxation. This project connects measured switching dynamics to a compact model and a program-and-verify strategy that targets the settled state.</p>
+<div class="method-flow" aria-label="Research workflow"><span>Measure<br>device dynamics</span><b aria-hidden="true">→</b><span>Calibrate<br>compact model</span><b aria-hidden="true">→</b><span>Select<br>write pulse</span><b aria-hidden="true">→</b><span>Verify<br>settled state</span></div>
+
+<figure><a href="../../assets/rram-settled-read.svg" target="_blank" rel="noopener"><img src="../../assets/rram-settled-read.svg" alt="Conceptual sequence separating an immediate read from the settled-state evaluation" loading="lazy"></a><figcaption>Why readback timing matters. This explanatory sequence summarizes the assessment already described here; it contains no additional measurement trace or model details.</figcaption></figure>
+
+<p>The distinction is between reaching a state immediately after a pulse and retaining a useful state after relaxation. It makes the readback time part of the evaluation criterion, alongside tolerance and programming effort.</p>
+<h2 id="contribution">My contribution</h2>
+
+<p>I developed a measurement-calibrated behavioral compact model and experimentally validated model-informed programming. This work builds on my broader role in VAN RRAM fabrication, electrical characterization, and automated parameter extraction in Wang’s Thin Film Group.</p>
+<ul>
+<li><strong>Characterization and calibration.</strong> I used pulse-response and relaxation measurements to connect the model to the device’s operating behavior, with MATLAB/Python workflows for analysis.</li>
+<li><strong>Compact modeling.</strong> I modeled nonlinear and asymmetric updates, post-write relaxation, and variation. A layered structure separates read behavior, pulse updates, relaxation, and stochastic effects.</li>
+<li><strong>Programming control.</strong> I used model predictions to select write pulses, then evaluated targeting error and programming effort in experimental program-and-verify tests.</li>
+</ul>
+<figure><a href="../../assets/compact-model.png" target="_blank" rel="noopener"><img src="../../assets/compact-model.png" alt="Event-driven layered compact model separating read, update, relaxation, and variation" loading="lazy"></a><figcaption>The model separates pulse-induced updates from relaxation and readout. Original diagram from the project presentation; select the figure to view it at full size.</figcaption></figure>
+
+<h2 id="results">Results & experimental scope</h2>
+
+<p>The compact model achieved <strong>0.042-decade mean absolute error</strong> in 10-second settled-state prediction. In the reported programming experiment, targeting success within <strong>±0.05 decade</strong> improved from <strong>22% to 94%</strong>, while mean pulse count decreased from <strong>3.3 to 2.7</strong>.</p>
+<figure><a href="../../assets/programming-validation.png" target="_blank" rel="noopener"><img src="../../assets/programming-validation.png" alt="Two-cell hardware programming comparison showing settled targeting success and tolerance sensitivity, including the 22 to 94 percent result for cell 18_R2C5" loading="lazy"></a><figcaption>Hardware validation from the project presentation. The 22% → 94% comparison corresponds to cell 18_R2C5 at a 0.05-decade tolerance, with 18 trials per strategy across three target levels and a 10-second readback. The second device responds differently; the plot includes Wilson 95% confidence intervals.</figcaption></figure>
+
+<p>The device-to-device difference matters: calibration and programming policies need validation across more cells. The result supports the value of targeting the settled state, while the broader reliability of the approach remains an ongoing experimental question.</p>
+<h2 id="resources">Project materials</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/tree/HEAD/VAN%20RRAM%20compact%20model%20adaptive%20programming">View the project presentation on GitHub ↗</a></p>
+<p><strong>Related manuscript:</strong> Henan Wang, et al., “A CeO₂:Au Vertically Aligned Nanocomposite Memristor: From Nonideal Switching Dynamics to Model-Informed Conductance Multilevel Programming.” Manuscript completed; planned for submission to IEEE EDTM 2027.</p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a><a href="../../research/bias-dac/">Programmable bias-voltage DAC <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

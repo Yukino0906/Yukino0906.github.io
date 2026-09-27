@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Precision bandgap reference — Henan Wang</title>
+<meta name="description" content="Schematic-level design and simulation of an approximately 1.5 V reference, including temperature compensation, startup behavior, and noise analysis."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Analog design · Voltage references</p><h1>A precision bandgap voltage reference</h1><p class="project-deck">Schematic-level design and simulation of an approximately 1.5 V reference, including temperature compensation, startup behavior, and noise analysis.</p><div class="project-meta"><span>Purdue SoCET · AMS team</span><span>Schematic simulation · No completed layout</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>5.7 ppm/°C</strong><span>Approximate nominal temperature coefficient over −40 to 125 °C</span></div></aside><article class="prose"><h2 id="overview">A stable on-chip reference</h2>
+
+<p>I independently designed and simulated a bandgap reference in Cadence Virtuoso/Spectre as part of Purdue SoCET’s analog and mixed-signal work. The design combines the complementary temperature dependence of VBE and ΔVBE to produce an approximately 1.5 V reference.</p>
+<p>The design uses a bandgap core, an amplifier and resistor network, current mirrors, and a startup circuit. The presentation documents the schematic-level implementation and simulation results. <strong>There is no completed layout or post-layout result for this project.</strong></p>
+<figure><a href="../../assets/bandgap-schematic.jpg" target="_blank" rel="noopener"><img src="../../assets/bandgap-schematic.jpg" alt="Bandgap reference schematic from the project presentation" loading="lazy"></a><figcaption>Schematic implementation from the bandgap presentation. Device and resistor ratios were adjusted for temperature compensation and operating-point behavior.</figcaption></figure>
+
+<h2 id="contribution">My contribution</h2>
+
+<p>I combined circuit calculations with simulation to choose component ratios and device sizes, establish the intended DC operating point, and examine the reference’s behavior across temperature and startup conditions.</p>
+<ul>
+<li><strong>Temperature compensation:</strong> balancing the PTAT and CTAT contributions through the circuit’s resistor and device ratios.</li>
+<li><strong>Startup analysis:</strong> checking that the reference reaches its operating point, including a slow supply-ramp case.</li>
+<li><strong>Noise analysis:</strong> examining output-noise spectral density and transient-noise behavior in simulation.</li>
+</ul>
+<h2 id="results">Schematic-level results</h2>
+
+<p>The nominal temperature sweep gives a reference-voltage range of <strong>1.49835–1.49975 V over −40 to 125 °C</strong>, corresponding to an approximate <strong>5.7 ppm/°C</strong> temperature coefficient. The presentation also reports about <strong>5.7–7.1 ppm/°C</strong> across its evaluated supply/temperature conditions, using supplies of 2.7, 3.0, and 3.3 V.</p>
+<figure><a href="../../assets/bandgap-temperature.jpg" target="_blank" rel="noopener"><img src="../../assets/bandgap-temperature.jpg" alt="Nominal bandgap reference temperature sweep with a shallow minimum near the middle of the temperature range" loading="lazy"></a><figcaption>Nominal reference-voltage temperature sweep. The temperature coefficient summarizes the peak-to-peak variation over the specified temperature range.</figcaption></figure>
+
+<p>The startup simulations include repeated power cycles and a <strong>100 µs supply rise time</strong>. The reference reaches approximately 1.5 V in the illustrated slow-ramp case. Noise simulations are also included in the original presentation.</p>
+<figure><a href="../../assets/bandgap-startup.jpg" target="_blank" rel="noopener"><img src="../../assets/bandgap-startup.jpg" alt="Bandgap reference startup waveform for a slow supply ramp" loading="lazy"></a><figcaption>Startup response under a slow power-up ramp, from the project presentation.</figcaption></figure>
+
+<h3>Output-noise behavior</h3>
+<figure><a href="../../assets/bandgap-noise-spectrum.png" target="_blank" rel="noopener"><img src="../../assets/bandgap-noise-spectrum.png" alt="Simulated output voltage-noise power spectral density versus frequency" loading="lazy"></a><figcaption>Output-noise power spectral density from the existing design presentation. The spectrum is higher at low frequency and decreases across the plotted range; this remains a schematic-level simulation.</figcaption></figure>
+
+<p>Temperature compensation, startup, and noise probe different aspects of reference behavior. This spectrum adds the frequency-domain check; a band-limited RMS noise value would require integration over a specified bandwidth and is not inferred here.</p>
+<h2 id="resources">Design presentation</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/tree/main/Analog%20Design-Bandgap%20Reference">View the bandgap design presentation on GitHub ↗</a></p>
+<p>The presentation acknowledges Seyedehmarzieh Rouhani, Mark C. Johnson, and the Purdue SoCET team.</p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

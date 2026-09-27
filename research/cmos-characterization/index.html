@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CMOS+X characterization — Henan Wang</title>
+<meta name="description" content="A modular NI PXIe platform and Python measurement framework, with initial SMU validation and coupon testing as the next stage."><meta name="theme-color" content="#183f72">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
+<nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">CMOS+X · Measurement infrastructure</p><h1>Automated characterization for CMOS+X devices</h1><p class="project-deck">A modular NI PXIe platform and Python measurement framework, with initial SMU validation and coupon testing as the next stage.</p><div class="project-meta"><span>NanoX Lab · Purdue SURF 2026</span><span>Awaiting coupon return for testing</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>SMU</strong><span>Initial measurement path experimentally validated</span></div></aside><article class="prose"><h2 id="overview">Characterization infrastructure</h2>
+
+<p>CMOS+X research combines conventional CMOS with emerging devices that can require different bias conditions, pulse sequences, and readout methods. I worked on a modular NI PXIe-based characterization platform and Python measurement framework to make those experiments configurable and repeatable.</p>
+<p>The project formed part of my 2026 Summer Undergraduate Research Fellowship at Purdue’s NanoX Lab. It supports the broader effort to develop BEOL-compatible integration workflows for emerging devices on post-CMOS coupons.</p>
+<figure><a href="../../assets/pxie-platform.png" target="_blank" rel="noopener"><img src="../../assets/pxie-platform.png" alt="NI PXIe platform used for measurement development" loading="lazy"></a><figcaption>The PXIe measurement platform shown in the SURF poster. Instruments and configurable software provide the basis for later coupon testing.</figcaption></figure>
+
+<h2 id="contribution">My contribution</h2>
+
+<p>I built the measurement infrastructure and modular software framework, separating test configuration from low-level instrument-control logic. The workflow connects recipe configuration, execution, and recorded results, with simulation and hardware backends.</p>
+<ul>
+<li><strong>Configuration-driven measurements.</strong> Recipes and instrument settings are separated from the execution logic so that test conditions can be changed without rewriting instrument drivers.</li>
+<li><strong>Measurement execution and output.</strong> The framework organizes electrical measurements and their resulting data, plots, and logs.</li>
+<li><strong>Initial hardware validation.</strong> I validated the SMU resistance-measurement path, establishing an experimental check of the hardware/software connection.</li>
+</ul>
+<p>This work was conducted with guidance from Prof. Haitong Li and Zeshu Wang, as acknowledged in the SURF poster.</p>
+<figure><a href="../../assets/cmos-platform-architecture.png" target="_blank" rel="noopener"><img src="../../assets/cmos-platform-architecture.png" alt="SURF poster diagram connecting host software, NI drivers, PXIe instruments, adapters, and the test device" loading="lazy"></a><figcaption>Measurement-platform architecture reproduced from the SURF materials. It places software, instrument modules, and device connections in context; the experimentally validated path reported here is the SMU path.</figcaption></figure>
+
+<p>The diagram shows where experiment configuration meets instrument control and physical connectivity. Listing a module in the platform describes the intended measurement capability, while the repeated-resistance experiment below identifies the path already checked on hardware.</p>
+<h2 id="results">Validated scope & next stage</h2>
+
+<p>The poster reports ten repeated resistance measurements for the initial SMU experiment. The synaptic-update, RRAM I–V, and stochastic digital-timing examples in that poster are <strong>simulated demonstrations</strong> of intended workflows.</p>
+<figure><a href="../../assets/cmos-smu-validation.png" target="_blank" rel="noopener"><img src="../../assets/cmos-smu-validation.png" alt="Ten repeated experimental resistance measurements compared with the reference resistance" loading="lazy"></a><figcaption>Experimental SMU-path validation from the SURF poster. This checks the resistance-measurement path; it is not a measurement of a fabricated CMOS+X chip.</figcaption></figure>
+
+<p>As of September 2026, the coupons are expected back soon. <strong>Testing the returned coupons is the next stage.</strong> No new coupon-level measurement result is claimed here. The next work connects the established platform to those devices and evaluates the relevant electrical behavior.</p>
+<h2 id="resources">Research poster</h2>
+
+<p><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio/tree/main/CMOS%2BX%20Automated%20Characterization">View the SURF poster on GitHub ↗</a></p>
+<p><strong>Recognition:</strong> Purdue SURF with Distinction, Summer 2026.</p>
+</article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Device-aware neuromorphic computing <span aria-hidden="true">→</span></a><a href="../../research/attention-accelerator/">Fixed-point attention accelerator <span aria-hidden="true">→</span></a></div></div></main>
+<footer id="contact" class="site-footer"><div class="footer-top"><div><p class="eyebrow">Contact</p><h2>Let’s talk research.</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="https://github.com/Yukino0906/Henan_PhD_Application_Portfolio" target="_blank" rel="noopener noreferrer">GitHub portfolio <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>
+</body></html>

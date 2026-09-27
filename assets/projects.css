@@ -1,0 +1,7 @@
+/* Additional project figures preserve the complete scientific image. */
+.project-visual.contain{background:#f2f5f8;padding:14px 14px 41px}
+.project-visual.contain.dark{background:#0b1119}
+.project-visual.contain>img{object-fit:contain;object-position:center}
+.project-metric strong{font-size:clamp(23px,2.4vw,29px)}
+@media(max-width:850px) and (min-width:621px){.project-metric{align-items:flex-start}}
+@media(max-width:620px){.project-metric{flex-wrap:wrap}.project-metric strong{font-size:28px}.project-metric>span{flex:1;min-width:130px}}

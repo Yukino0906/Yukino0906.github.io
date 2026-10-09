@@ -5,3 +5,11 @@
 .project-metric strong{font-size:clamp(23px,2.4vw,29px)}
 @media(max-width:850px) and (min-width:621px){.project-metric{align-items:flex-start}}
 @media(max-width:620px){.project-metric{flex-wrap:wrap}.project-metric strong{font-size:28px}.project-metric>span{flex:1;min-width:130px}}
+.inference-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:28px 0}
+.inference-result{padding:24px;background:#f2f5f8;border:1px solid #dce3ea}
+.prose .inference-result h4{font-size:16px;line-height:1.5;margin:0 0 18px;color:#183f72}
+.prose .inference-result p{font-size:15px;line-height:1.7;margin:14px 0 0}
+.prose .inference-result .inference-value{font-family:Georgia,serif;font-size:46px;line-height:1.2;color:#183f72;margin:0 0 18px}
+.inference-value span{font-size:19px;font-family:Arial,sans-serif;margin-left:5px}
+.prose .inference-result .inference-comparison{border-top:1px solid #dce3ea;padding-top:16px}
+@media(max-width:620px){.inference-results{grid-template-columns:1fr;gap:16px}.inference-result{padding:22px}}

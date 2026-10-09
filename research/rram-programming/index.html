@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RRAM modeling &amp; programming — Henan Wang</title>
-<meta name="description" content="Measurement-calibrated compact models and programming strategies that account for nonlinear switching and post-write relaxation."><meta name="theme-color" content="#183f72">
+<meta name="description" content="Measurement-calibrated modeling and conductance programming, linked to MNIST and GPT-2 inference simulations using measured programming errors."><meta name="theme-color" content="#183f72">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css"></head>
 <body><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
 <nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../cv/" >CV</a><a href="#contact">Contact</a></nav></div></header>
-<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Emerging devices · Compact modeling</p><h1>Making memristor programming predictable</h1><p class="project-deck">Measurement-calibrated compact models and programming strategies that account for nonlinear switching and post-write relaxation.</p><div class="project-meta"><span>Wang’s Thin Film Group · Purdue University</span><span>IEEE EDTM 2027 · Submitted</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>22% → 94%</strong><span>4/18 → 17/18 successful trials · ±0.05 decade at 10 s</span></div></aside><article class="prose"><h2 id="overview">The research question</h2>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Emerging devices · Compact modeling</p><h1>Making memristor programming predictable</h1><p class="project-deck">Measurement-calibrated modeling and conductance programming, linked to MNIST and GPT-2 inference simulations using measured programming errors.</p><div class="project-meta"><span>Wang’s Thin Film Group · Purdue University</span><span>IEEE EDTM 2027 · Submitted</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>22% → 94%</strong><span>4/18 → 17/18 successful trials · ±0.05 decade at 10 s</span></div></aside><article class="prose"><h2 id="overview">The research question</h2>
 
 <p>How can a programming strategy reach a useful conductance state when a memristor continues to relax after a write?</p>
 <p>In Au–CeO₂ vertically aligned nanocomposite (VAN) devices, gradual conductance tuning provides a route to multilevel operation. A state observed immediately after a pulse can differ from the state available later. My work connects device characterization, compact modeling, and experimental programming evaluation around that distinction.</p>
@@ -20,6 +20,7 @@
 <li><strong>Device characterization.</strong> I examined switching behavior and post-write stability, connecting electrical observations to the practical demands of multilevel operation.</li>
 <li><strong>Model development.</strong> I translated measured nonideal behavior into a simulation model and assessed its predictive accuracy against device measurements.</li>
 <li><strong>Experimental evaluation.</strong> I compared programming outcomes using a defined readback time and conductance tolerance, while also tracking programming effort.</li>
+<li><strong>Inference evaluation.</strong> I connected measured programming errors to neural-network simulations, evaluating their effect on image classification with MNIST and language modeling with GPT-2.</li>
 </ul>
 <p>The engineering challenge is to make prediction accuracy useful in a physical programming experiment. A low model error and a high targeting success rate answer different questions, so both are reported below.</p>
 <figure><a href="../../assets/rram-settled-read.svg" target="_blank" rel="noopener"><img src="../../assets/rram-settled-read.svg" alt="Conceptual distinction between an immediate read and settled-state evaluation" loading="lazy"></a><figcaption>Conceptual explanation of the evaluation criterion. Readback timing matters because the useful state is the one available after relaxation. This is an explanatory diagram, not a measured waveform or an implementation diagram.</figcaption></figure>
@@ -52,6 +53,15 @@
 </tr>
 </tbody></table>
 <p>These results describe a bounded experimental evaluation, not an array-wide yield or reliability specification. Validation across additional devices and conditions remains important. Programming effort is reported as pulses per successful outcome, rather than mean pulses per attempted trial; the two quantities have different denominators.</p>
+<h3 id="inference">From measured programming errors to neural-network inference</h3>
+
+<p>The next question is whether better conductance targeting preserves useful network accuracy. I evaluated <strong>inference in simulation using measured programming errors</strong>, connecting the device-level experiments to both image classification and language modeling.</p>
+<div class="inference-results" aria-label="Neural-network inference results">
+<section class="inference-result"><h4>MNIST · Image classification</h4><p class="inference-value">95.9<span>%</span></p><p>MLP classification accuracy using measured programming errors, compared with a <strong>96.2% software baseline</strong>.</p><p class="inference-comparison"><strong>+4.4 percentage points</strong> over fixed-amplitude programming at the same weight range and training conditions.</p></section>
+<section class="inference-result"><h4>GPT-2 · Language modeling</h4><p class="inference-value">~12<span>× lower perplexity</span></p><p>WikiText-2 perplexity is approximately <strong>one-twelfth of the fixed-amplitude programming baseline</strong>, at the same weight range and training conditions.</p><p class="inference-comparison">Lower perplexity indicates better next-token prediction. This is a quality metric, not a throughput or energy result.</p></section>
+</div>
+
+<p>These results connect physical programming quality to task-level inference performance. The evidence combines <strong>experimental device programming</strong> with <strong>device-aware network simulation</strong>; it does not demonstrate training or running MNIST or GPT-2 on a physical memristor array. The comparison holds weight range and training conditions constant to isolate the effect of the programming policy.</p>
 <h2 id="resources">Related research</h2>
 
 <p><strong>Related manuscript:</strong> Henan Wang, et al., “Device–Algorithm Co-Design Enabling a CeO₂-based Vertically Aligned Nanocomposite Memristor for Neuromorphic Computing.” IEEE EDTM 2027 — submitted.</p>

@@ -13,3 +13,6 @@
 .inference-value span{font-size:19px;font-family:Arial,sans-serif;margin-left:5px}
 .prose .inference-result .inference-comparison{border-top:1px solid #dce3ea;padding-top:16px}
 @media(max-width:620px){.inference-results{grid-template-columns:1fr;gap:16px}.inference-result{padding:22px}}
+.page-intro.piano-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,300px);align-items:center;gap:2.5rem;max-width:none;padding-block:clamp(4rem,9vw,7rem)}
+.piano-note{font-size:18px;color:var(--muted)}.piano-keys{display:block;width:100%;height:auto}
+@media(max-width:620px){.header-inner{flex-wrap:wrap;gap:6px 18px}.site-header nav{flex-wrap:wrap;gap:2px 16px}.site-header nav a{white-space:nowrap}.page-intro.piano-intro{grid-template-columns:1fr;gap:2rem}.piano-keys{max-width:240px}}

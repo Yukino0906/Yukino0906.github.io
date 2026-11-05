@@ -13,6 +13,19 @@
 .inference-value span{font-size:19px;font-family:Arial,sans-serif;margin-left:5px}
 .prose .inference-result .inference-comparison{border-top:1px solid #dce3ea;padding-top:16px}
 @media(max-width:620px){.inference-results{grid-template-columns:1fr;gap:16px}.inference-result{padding:22px}}
-.page-intro.piano-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,300px);align-items:center;gap:2.5rem;max-width:none;padding-block:clamp(4rem,9vw,7rem)}
-.piano-note{font-size:18px;color:var(--muted)}.piano-keys{display:block;width:100%;height:auto}
-@media(max-width:620px){.header-inner{flex-wrap:wrap;gap:6px 18px}.site-header nav{flex-wrap:wrap;gap:2px 16px}.site-header nav a{white-space:nowrap}.page-intro.piano-intro{grid-template-columns:1fr;gap:2rem}.piano-keys{max-width:240px}}
+.beyond-page{padding-bottom:4rem}.beyond-page .page-intro{max-width:none;padding-bottom:2rem}
+.beyond-page .page-intro nav{display:flex;gap:1.5rem;margin-top:1.2rem}
+.beyond-section-head{margin:3rem 0 2rem}.beyond-section-head h2{font-size:clamp(32px,4vw,48px)}
+.beyond-section-head p{max-width:66ch;color:var(--muted);margin-top:.8rem}
+.rep-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 3rem}
+.rep-group,.anime-rep{border-top:1px solid var(--line);padding-top:1rem}
+.beyond-page h3{font:normal 25px/1.3 var(--serif);margin:.25rem 0 .8rem}
+.rep-grid ul,.anime-rep ul{padding:0;margin:0;list-style:none}
+.rep-grid li,.anime-rep li{padding:.52rem 0;line-height:1.45}
+.rep-detail{display:block;font-size:.89rem;color:var(--muted);margin-top:.15rem}
+.practice-tag{display:inline-block;margin-left:.5em;padding:.12em .55em;border-radius:3px;background:#e8f2ee;color:#305547;font-size:.75rem;white-space:nowrap}
+.anime-rep{margin:2.5rem 0 3rem}.anime-rep ul,.travel-regions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem 2rem}
+.anime-rep strong{font-weight:600}.beyond-page #travel{border-top:1px solid var(--line)}
+.travel-map{margin:0}.travel-map img{width:100%;height:auto;border:1px solid var(--line);border-radius:4px}.travel-map figcaption{margin:.5rem 0 1.5rem;font-size:.8rem;color:var(--muted)}
+.travel-regions{grid-template-columns:2fr 1.4fr 1fr}.travel-regions h3{font-size:20px}.travel-regions p{color:var(--muted)}
+@media(max-width:620px){.header-inner{flex-wrap:wrap;gap:6px 18px}.site-header nav{flex-wrap:wrap;gap:2px 16px}.site-header nav a{white-space:nowrap}.rep-grid,.travel-regions{grid-template-columns:1fr;gap:1.5rem}.anime-rep ul{grid-template-columns:1fr 1fr;gap:.3rem 1rem}}

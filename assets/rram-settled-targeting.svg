@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 198" role="img" aria-labelledby="title desc">
+  <title id="title">Programming success after ten seconds</title>
+  <desc id="desc">Four of eighteen fixed-amplitude trials and seventeen of eighteen model-informed trials reached the target window on the same device.</desc>
+  <rect width="640" height="198" fill="white"/>
+  <g font-family="Arial, sans-serif" fill="#172d34">
+    <text x="18" y="34" font-size="23" font-weight="600">Successful trials at 10 s</text>
+    <g font-size="20">
+      <text x="18" y="85">Fixed amplitude</text>
+      <text x="18" y="140">Model-informed</text>
+    </g>
+    <g fill="#e5eae9">
+      <rect x="182" y="62" width="378" height="31"/>
+      <rect x="182" y="117" width="378" height="31"/>
+    </g>
+    <rect x="182" y="62" width="84" height="31" fill="#687984"/>
+    <rect x="182" y="117" width="357" height="31" fill="#186956"/>
+    <g font-size="21" font-weight="600">
+      <text x="572" y="85">4/18</text>
+      <text x="572" y="140">17/18</text>
+    </g>
+    <text x="182" y="180" font-size="17">Same device · three targets · six trials per target</text>
+  </g>
+</svg>

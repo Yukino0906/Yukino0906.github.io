@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 350" role="img" aria-labelledby="title description">
+  <title id="title">Lateral and vertical transport measurements</title>
+  <desc id="description">Two idealized film cross sections. An arrow parallel to the surface marks lateral bias, and an arrow through the thickness marks vertical bias. The drawings omit the layer structure.</desc>
+  <defs>
+    <marker id="tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path fill="#0d605b" d="M0 0 10 5 0 10z"/></marker>
+  </defs>
+  <rect width="640" height="350" fill="#f1f5f5"/>
+  <path d="M320 47v256" stroke="#bbcbcc"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#1a3747">
+    <text x="162" y="77" font-family="Georgia, serif" font-size="31">Lateral bias</text>
+    <text x="479" y="77" font-family="Georgia, serif" font-size="31">Vertical bias</text>
+    <g fill="#c6d9d8" stroke="#587d7f" stroke-width="2">
+      <rect x="47" y="157" width="230" height="64"/>
+      <rect x="365" y="157" width="230" height="64"/>
+    </g>
+    <g stroke="#0d605b" stroke-width="5" fill="none" marker-end="url(#tip)">
+      <path d="M80 189h158"/>
+      <path d="M480 130v110"/>
+    </g>
+    <text x="162" y="281" font-size="21">Along the film</text>
+    <text x="480" y="281" font-size="21">Through its thickness</text>
+  </g>
+</svg>

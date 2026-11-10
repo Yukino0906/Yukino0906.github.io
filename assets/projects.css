@@ -1,4 +1,29 @@
 /* Additional project figures preserve the complete scientific image. */
+.project-copy .project-role, .project-meta .project-role {
+  color: var(--blue);
+  font-size: .84rem;
+  font-weight: 600;
+  margin-top: .35rem;
+}
+.project-meta .project-role { margin-top: 0; }
+.skills-page { padding-bottom: 4rem; }
+.skill-section {
+  display: grid;
+  grid-template-columns: minmax(13rem, 1fr) minmax(0, 1.8fr);
+  gap: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+}
+.skill-section h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); }
+.skill-section p, .skill-section dd { color: var(--muted); }
+.skill-section p + p { margin-top: .75rem; }
+.skill-section a { display: inline-block; margin: 1rem 1rem 0 0; font-weight: 600; }
+.skill-section dt { margin-top: .65rem; font-weight: 600; }
+.skill-section dd { margin: 0; }
+@media (max-width: 760px) {
+  .site-header nav { gap: 6px 16px; }
+  .skill-section { grid-template-columns: 1fr; gap: 1rem; }
+}
 .project-visual.contain{background:#f2f5f8;padding:14px 14px 41px}
 .project-visual.contain.dark{background:#0b1119}
 .project-visual.contain>img{object-fit:contain;object-position:center}

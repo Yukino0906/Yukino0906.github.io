@@ -15,9 +15,20 @@
 <h2 id="contribution">Designing for the delayed read</h2>
 
 <p>I led the experimental and modeling work on this project. I characterized the pulse response, built a behavioral compact model from measured data, implemented model-informed programming, and carried the measured programming errors into network simulations. The materials work was part of a collaboration in Wang’s Thin Film Group.</p>
-<figure><a href="../../assets/rram-microstructure.jpg" target="_blank" rel="noopener"><img src="../../assets/rram-microstructure.jpg" alt="Cross-sectional microscopy of the vertically aligned nanocomposite, with a 20 nm scale bar" loading="lazy"></a><figcaption>Cross section of the device material. The vertical contrast shows the nanocomposite microstructure. Scale bar, 20 nm.</figcaption></figure>
+<h3 id="eds">Gold-rich columns in the CeO₂ film</h3>
 
-<p>I used the hold measurements to predict the state the device would reach after relaxation. A single relaxation response gave a 10-second prediction error of 0.218 decade on the programming device. Accounting for the dependence on written state reduced it to 0.042 decade. This gave me a criterion for choosing the next pulse: how close its predicted <strong>10-second conductance</strong> would be to the target.</p>
+<p>The cross section shows columns extending through the film. Energy-dispersive X-ray spectroscopy (EDS) adds the chemical detail: gold is concentrated in columns within the ceria matrix, with a weaker gold signal near the film surface.</p>
+<figure>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;align-items:start">
+<a href="../../assets/rram-microstructure.jpg" target="_blank" rel="noopener"><img src="../../assets/rram-microstructure.jpg" width="2400" height="2475" alt="Cross-sectional micrograph showing the columnar film above the substrate, with a 20 nm scale bar" loading="lazy"></a>
+<a href="../../assets/rram-eds-element-map.png" target="_blank" rel="noopener"><img src="../../assets/rram-eds-element-map.png" width="1024" height="1024" alt="Cross-sectional EDS map showing yellow gold-rich columns in the blue cerium-rich film above the green strontium-containing substrate, with a 20 nm scale bar" loading="lazy"></a>
+</div>
+<figcaption>Cross-sectional microscopy and an EDS elemental map from a film grown with the same recipe. In the map, Sr (green) marks the substrate, Ce (blue) the film, and Au (yellow) the columns. Both scale bars are 20 nm.</figcaption>
+</figure>
+
+<h3>Predicting conductance after a write</h3>
+
+<p>I fitted the compact model to the electrical pulse and hold measurements. A single relaxation response gave a 10-second prediction error of 0.218 decade on the programming device. Accounting for the dependence on written state reduced it to 0.042 decade. I then chose each programming pulse according to how close its predicted <strong>10-second conductance</strong> would be to the target.</p>
 <h2 id="results">Testing the programming decision</h2>
 
 <p>I compared fixed-amplitude and model-informed writes on one device. Each policy had six attempts at each of three target conductances, with the same tolerance (±0.05 decade), readback time (10 s), and allowance for correction. After the full correction sequence, the fixed-amplitude policy reached the target in <strong>4 of 18 trials</strong>. The model-informed policy succeeded in <strong>17 of 18</strong>. Pulses per successful outcome fell from <strong>14.8 to 2.9</strong>.</p>

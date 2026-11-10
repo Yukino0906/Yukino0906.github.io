@@ -1,58 +1,58 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fixed-point attention accelerator — Henan Wang</title>
-<meta name="description" content="I replaced sequential divisions with row-wise reciprocals, then redesigned how a memory-backed attention head moves operands and results between tasks."><meta name="theme-color" content="#183f72">
+<meta name="description" content="My first memory-backed attention head spent 48 cycles copying operands it had already prefetched. I removed that copy and overlapped host transfers with computation."><meta name="theme-color" content="#183f72">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='4' fill='%23183f72'/%3E%3Cpath d='M11 10v20m18-20v20M11 20h18' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/projects.css?v=2f08546cecf7"></head>
 <body><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner"><a class="wordmark" href="../../" aria-label="Henan Wang home"><span class="monogram">hw<span>.</span></span><span>Henan Wang</span></a>
 <nav aria-label="Main navigation"><a href="../../" >Home</a><a href="../../research/" aria-current="page">Research</a><a href="../../skills/" >Skills</a><a href="../../cv/" >CV</a><a href="../../beyond-research/" >Beyond Research</a><a href="#contact">Contact</a></nav></div></header>
-<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Digital design · Near-memory computing</p><h1>A fixed-point attention accelerator, through layout</h1><p class="project-deck">I replaced sequential divisions with row-wise reciprocals, then redesigned how a memory-backed attention head moves operands and results between tasks.</p><div class="project-meta"><span class="project-role">Independent</span><span>Chips and AI Hackathon · Solo project</span><span>Post-route verification · GDSII stream-out</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>577 → 205</strong><span>Compute cycles from start to done after normalization optimization</span></div></aside><article class="prose"><h2 id="overview">A memory-backed attention head</h2>
+<main id="main"><div class="page-width"><section class="project-intro"><a class="back-link" href="../">← All research</a><p class="eyebrow">Digital design · Near-memory computing</p><h1>A fixed-point attention accelerator, through layout</h1><p class="project-deck">My first memory-backed attention head spent 48 cycles copying operands it had already prefetched. I removed that copy and overlapped host transfers with computation.</p><div class="project-meta"><span class="project-role">Independent</span><span>Chips and AI Hackathon · Solo project</span><span>Post-route verification · GDSII stream-out</span></div></section><div class="article-layout"><aside class="article-aside"><p class="eyebrow">In this project</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#contribution">My contribution</a><a href="#results">Results</a><a href="#resources">Resources</a></nav><div class="aside-metric"><strong>329 → 213</strong><span>Cycles between successive tasks in the serial and pipelined memory-backed designs</span></div></aside><article class="prose"><h2 id="overview">A memory-backed attention head</h2>
 
-<p>I designed and verified a fixed-point attention head for the Chips and AI Hackathon. It takes three 4 × 4 matrices of signed 8-bit operands and computes softmax(QKᵀ/√D) · V. I implemented it from RTL through GDSII using a commercial 40 nm CMOS PDK.</p>
-<p>My first version with a compiled register file accepted a new task every 329 cycles. The earlier flip-flop design had needed only 269. To find where the extra time went, I traced a task from the first host write to the last result read.</p>
+<p>I designed and verified a fixed-point attention head for the Chips and AI Hackathon. It computes softmax(QKᵀ/√D) · V on three 4 × 4 matrices of signed 8-bit operands. I took the final design (M9c) from RTL through GDSII using a commercial 40 nm CMOS PDK.</p>
+<p>Moving the operands from flip-flops into a compiled register file initially slowed the design down. A complete serial transaction went from 269 to 329 cycles. Tracing one task revealed that the controller fetched all 48 input bytes from memory, then spent another 48 cycles copying those same bytes into the core. The arithmetic still took 205 cycles.</p>
 <figure><a href="../../assets/attention-dataflow.svg" target="_blank" rel="noopener"><img src="../../assets/attention-dataflow.svg" width="680" height="450" alt="A bank controller reads and writes a two-bank register file, sends Q, K and V to the attention core in parallel, and the host reads and acknowledges results from two output banks." loading="lazy"></a><figcaption>Logical dataflow of the implemented attention head. The input banks share one compiled register file. The output banks are separate registers that keep a result available until the host acknowledges it.</figcaption></figure>
 
 <h2 id="contribution">Where the cycles went</h2>
 
 <h3>One reciprocal per row</h3>
-<p>Normalizing the 4 × 4 attention matrix originally took 16 sequential divisions. I computed one reciprocal for each row and reused it across the row’s four entries, multiplying and rounding each product. This reduced the compute window from <strong>577 to 205 cycles</strong>, measured from accepting the start signal to a result-ready indication. With the selected rounding rule, the largest output difference from the divider version was one output code.</p>
+<p>Before integrating memory, I replaced 16 sequential divisions with four row-wise reciprocals. Each row reused its reciprocal across four multiply-and-round operations. The arithmetic core went from <strong>577 to 205 cycles</strong> from start to done. The largest observed difference between the two arithmetic versions was one output code. I kept the reciprocal datapath through both memory-backed versions.</p>
 <h3>Operand delivery and overlap between tasks</h3>
-<p>In the first memory-backed design, the controller prefetched Q, K and V, then spent another 48 cycles forwarding the operands to the core one element at a time. I changed the core to read the complete 384-bit prefetch word in parallel. That removed the internal feed. Four fewer control cycles brought the single-task latency from <strong>265 to 213 cycles</strong>, with the arithmetic still taking 205.</p>
-<p>The host also spent 48 cycles <strong>loading the next input</strong> and 16 cycles <strong>reading the previous result</strong>. I split the input storage into two banks so the host could load one while the controller prefetched from the other. Two output register banks let the host read one result while the core produced the next. An acknowledgement frees each output bank. When both are occupied, the accelerator waits before accepting another task.</p>
+<p>In M9c, I wired the 384-bit prefetch buffer directly to the core. Once all operands were present, the core could use them in parallel. Eliminating the serial copy and shortening the control sequence saved 52 cycles per task.</p>
+<p>I used the register file’s independent read and write ports to let the host load the next task into one input bank while the controller fetched operands from the other. Two output banks let the host read an earlier result while the core worked on the current one. Under a continuous workload, that hid a further <strong>48 cycles of host writes and 16 cycles of result reads</strong> per task.</p>
 <h2 id="results">Task interval and verification</h2>
 
 <table>
 <thead>
 <tr>
-<th>Timing window</th>
-<th align="right">Baseline</th>
-<th align="right">Optimized</th>
+<th>Timing window (cycles)</th>
+<th align="right">First memory-backed design</th>
+<th align="right">M9c</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>Arithmetic core, start to done</td>
-<td align="right">577 cycles</td>
-<td align="right">205 cycles</td>
+<td align="right">205</td>
+<td align="right">205</td>
 </tr>
 <tr>
-<td>One memory-backed task, accept to result</td>
-<td align="right">265 cycles</td>
-<td align="right">213 cycles</td>
+<td>Task accepted to result available</td>
+<td align="right">265</td>
+<td align="right">213</td>
 </tr>
 <tr>
-<td>Memory-backed stream, successive task accepts</td>
-<td align="right">329 cycles</td>
-<td align="right">213 cycles</td>
+<td>Continuous stream, successive task accepts</td>
+<td align="right">329</td>
+<td align="right">213</td>
 </tr>
 </tbody></table>
-<p>The 116-cycle reduction in the stream interval combines <strong>52 cycles saved within a task</strong> and <strong>64 cycles of host I/O overlapped with computation</strong>. I checked the resulting 213-cycle interval in a stream of 24 tasks.</p>
+<p>The 213-cycle single-task latency starts when the accelerator accepts the task, after the host has loaded its inputs. Host writes and result reads also take time for an isolated task. In a stream they can overlap computation: in a 24-task simulation, successive accepts were <strong>213 cycles</strong> apart.</p>
 <figure><a href="../../assets/attention-task-waveform.png" target="_blank" rel="noopener"><img src="../../assets/attention-task-waveform.png" alt="Simulation waveform showing task accepts 213 cycles apart while an earlier result is read and acknowledged" loading="lazy"></a><figcaption>At 100 MHz, the task accepts marked at 5,280 and 7,410 ns are 213 cycles apart. The host acknowledges an earlier result between them.</figcaption></figure>
 
-<p>I checked the optimized design against its bit-accurate Python model using <strong>216 distinct input vectors</strong> (16 directed and 200 random). The same vectors matched the model in RTL simulation and in gate-level simulation with post-route delays.</p>
+<p>I checked the same <strong>216 distinct input vectors</strong> (16 directed and 200 random) against a bit-accurate Python model in RTL simulation and again in gate-level simulation with post-route delays. All outputs matched bit for bit.</p>
 <h2 id="resources">Physical implementation</h2>
 
-<p>I completed synthesis, placement, clock-tree synthesis and routing, then streamed out the GDSII and checked it by reading it back. At 100 MHz, the reported worst setup and hold slacks were <strong>+0.046 ns</strong> and <strong>+0.030 ns</strong>. These are post-route timing results. Physical verification covered the implementation tool’s checks; foundry sign-off DRC and LVS were outside the scope of the prototype.</p>
+<p>I completed synthesis, placement, clock-tree synthesis and routing, then checked the streamed GDSII by reading it back. At <strong>100 MHz</strong>, the final post-route timing analysis reported worst setup and hold slacks of <strong>+0.046 ns</strong> and <strong>+0.030 ns</strong>. Physical verification covered the implementation tool’s checks. Foundry sign-off DRC and LVS were outside the scope of this prototype.</p>
 <figure><img class="layout-figure" src="../../assets/attention-layout-overview.png" alt="Blurred overview of the attention accelerator’s physical layout" loading="lazy"><figcaption>Post-route view of the attention accelerator, blurred for public display.</figcaption></figure>
 </article></div><div class="related-projects"><p class="eyebrow">Continue exploring</p><a href="../../research/rram-programming/">RRAM modeling & programming <span aria-hidden="true">→</span></a><a href="../../research/neuromorphic-computing/">Dual-mode RRAM & device-aware computing <span aria-hidden="true">→</span></a><a href="../../research/bias-dac/">Analog design & programmable bias <span aria-hidden="true">→</span></a></div></div></main>
 <footer id="contact" class="site-footer"><div class="footer-top"><div><h2>Contact</h2><a class="email" href="mailto:wang6174@purdue.edu">wang6174@purdue.edu <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="../../research/">Research projects</a><a href="https://www.linkedin.com/in/henanwang96" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="../../files/Henan_Wang_CV.pdf">Curriculum vitae <span aria-hidden="true">↓</span></a></div></div><div class="footer-bottom"><span>© 2026 Henan Wang</span><span>Purdue University · West Lafayette, Indiana</span></div></footer>

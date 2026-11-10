@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="450" viewBox="0 0 680 450"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Fixed-point attention head dataflow</title>
+  <desc id="desc">The host loads Q, K and V through the bank controller into a two-bank register file. The controller prefetches a complete operand word for the compute core. Two output banks hold results until the host reads and acknowledges them.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#222"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #161616; }
+      .name { font-size: 20px; font-weight: bold; text-anchor: middle; }
+      .label { font-size: 16px; }
+      .detail { font-size: 16px; text-anchor: middle; }
+      .box, .wire { stroke: #222; stroke-width: 1.8; fill: none; }
+      .wire { marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="680" height="450" fill="white"/>
+  <text class="label" x="153" y="30">Host writes Q, K, V</text>
+  <path class="wire" d="M139 24V65"/>
+
+  <rect class="box" x="24" y="68" width="278" height="84"/>
+  <text class="name" x="163" y="102">Bank controller</text>
+  <text class="detail" x="163" y="131">Validity bitmap · prefetch buffer</text>
+
+  <rect class="box" x="444" y="57" width="212" height="103"/>
+  <text class="name" x="550" y="86">1W1R register file</text>
+  <path class="box" d="M444 103H656 M550 103V160"/>
+  <text class="detail" x="497" y="137">Bank A</text>
+  <text class="detail" x="603" y="137">Bank B</text>
+  <path class="wire" d="M302 92H441"/>
+  <text class="detail" x="373" y="82">write</text>
+  <path class="wire" d="M444 134H305"/>
+  <text class="detail" x="373" y="124">read</text>
+
+  <path class="wire" d="M139 152V211"/>
+  <text class="label" x="153" y="185">384-bit operand word</text>
+  <rect class="box" x="24" y="214" width="278" height="68"/>
+  <text class="name" x="163" y="242">Attention compute core</text>
+  <text class="detail" x="163" y="266">QKᵀ → softmax → PV</text>
+  <path class="wire" d="M302 248H441"/>
+  <text class="detail" x="373" y="236">result</text>
+
+  <rect class="box" x="444" y="208" width="212" height="81"/>
+  <text class="name" x="550" y="236">Output registers</text>
+  <path class="box" d="M444 247H656 M550 247V289"/>
+  <text class="detail" x="497" y="275">Bank 0</text>
+  <text class="detail" x="603" y="275">Bank 1</text>
+  <path class="wire" d="M550 289V358"/>
+  <text class="label" x="561" y="329">result</text>
+  <rect class="box" x="444" y="361" width="212" height="51"/>
+  <text class="name" x="550" y="385">Host</text>
+  <text class="detail" x="550" y="405">Read and acknowledge</text>
+</svg>

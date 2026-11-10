@@ -15,9 +15,23 @@
 <p>I deposited oxide thin films by pulsed laser deposition, varied growth conditions, and compared electrical switching across specimens. I studied individual films alongside integrated structures so I could ask where a change in behavior first appeared. X-ray diffraction helped me examine film growth, and cross-sectional microscopy let me inspect the buried interfaces.</p>
 <figure><a href="../../assets/1s1r-cross-section.png" target="_blank" rel="noopener"><img src="../../assets/1s1r-cross-section.png" alt="Cross-sectional micrograph showing a thin dark band between brighter layers and a 20 nm scale bar" loading="lazy"></a><figcaption>Cross-section of an experimental multilayer specimen. The dark band can be followed across the field of view, and its boundary with the brighter film varies locally. Scale bar, 20 nm.</figcaption></figure>
 
+<h3 id="diffraction">Separating film and substrate diffraction</h3>
+
+<p>The substrate contributes its own diffraction spots. I used a substrate-only pattern as a reference for the region containing both film and substrate. Additional spots are visible in the combined pattern. Assigning them to a particular phase would require indexing the reflections.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;align-items:start">
+<figure style="margin:0"><a href="../../assets/film-diffraction-substrate.jpg" target="_blank" rel="noopener"><img src="../../assets/film-diffraction-substrate.jpg" alt="Substrate-only diffraction pattern showing regularly spaced bright spots around the central beam." loading="lazy"></a><figcaption>Substrate only. The reciprocal-space scale bar is 5 nm⁻¹.</figcaption></figure>
+<figure style="margin:0"><a href="../../assets/film-diffraction-with-substrate.jpg" target="_blank" rel="noopener"><img src="../../assets/film-diffraction-with-substrate.jpg" alt="Diffraction from a region containing film and substrate, with additional spots between the brighter reflections." loading="lazy"></a><figcaption>Film and substrate together. The pattern includes more reflections at the same displayed scale, 5 nm⁻¹.</figcaption></figure>
+</div>
+
 <h2 id="results">Relating interfaces to switching</h2>
 
-<p>One challenge was interpreting a sample that switched but behaved like a memory element where I expected a selector response. I examined interface quality in cross-section and tested how current responded as I applied and removed the bias. Temperature-controlled electrical characterization is a further step toward understanding the switching mechanism.</p>
+<p>An integrated sample showed memory-like switching where I expected a selector response. To interpret that result, I compared electrical sweeps from separate test films. On a VO₂ specimen, I compared the current over three voltage ranges. On a resistive-memory specimen, I repeated the sweep to check whether the separation between branches recurred.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;align-items:start">
+<figure style="margin:0"><a href="../../assets/film-selector-voltage-sweeps.png" target="_blank" rel="noopener"><img src="../../assets/film-selector-voltage-sweeps.png" width="696" height="566" alt="Log-scale current versus voltage for a vanadium dioxide test film, with sweep limits of 3, 5 and 8 volts." loading="lazy"></a><figcaption>VO₂ test film. The red, blue and black traces show sweeps extending to ±3, ±5 and ±8 V. The branches separate as the sweep range widens.</figcaption></figure>
+<figure style="margin:0"><a href="../../assets/film-memory-repeat-sweeps.png" target="_blank" rel="noopener"><img src="../../assets/film-memory-repeat-sweeps.png" width="685" height="560" alt="Three current–voltage sweeps of a resistive-memory film showing a recurring hysteresis loop." loading="lazy"></a><figcaption>Resistive-memory test film. Three runs show a recurring loop, with different currents at the same applied voltage depending on the sweep history.</figcaption></figure>
+</div>
+
+<p>These sweeps establish how the separate films respond during a voltage scan. To verify selector action in the integrated device, I also need to determine whether it returns to low conductance when the bias is removed.</p>
 <h2 id="resources">Broader thin-film studies</h2>
 
 <p>My materials work also spans ferroelectric and ferromagnetic heterostructures, vanadium dioxide phase-change films, and devices with two-dimensional barriers. Across these systems, I use diffraction, microscopy, and electrical measurements to examine how growth, morphology, and interfaces affect device properties.</p>

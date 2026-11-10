@@ -12,7 +12,7 @@
 <p>How can a fixed-point attention datapath reduce arithmetic and memory overhead while preserving bit-accurate behavior through physical implementation?</p>
 <p>For the Chips and AI Hackathon, I designed a synthesizable signed-int8 scaled dot-product attention accelerator. The project covers arithmetic building blocks, matrix multiplication, a systolic array, QKᵀ, a lookup-table exponential, fixed-point normalization, and the probability–value (PV) datapath.</p>
 <p>I developed the project independently, including optimization, verification, hard-memory integration, and the RTL-to-GDSII implementation in TSMC N40.</p>
-<figure><a href="../../assets/attention-layout.png" target="_blank" rel="noopener"><img class="layout-figure" src="../../assets/attention-layout.png" alt="Final physical layout of the attention accelerator, including the hard-memory macro and surrounding logic" loading="lazy"></a><figcaption>The attention macro’s physical layout, from the project portfolio. Select the image to inspect the original at full size.</figcaption></figure>
+<figure><img class="layout-figure" src="../../assets/attention-layout-overview.png" alt="Blurred overview of the attention accelerator’s physical layout" loading="lazy"><figcaption>Post-route view of the attention accelerator, blurred for public display.</figcaption></figure>
 
 <h2 id="contribution">My contribution</h2>
 

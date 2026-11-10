@@ -15,11 +15,22 @@
   border-top: 1px solid var(--line);
 }
 .skill-section h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); }
-.skill-section p, .skill-section dd { color: var(--muted); }
-.skill-section p + p { margin-top: .75rem; }
-.skill-section a { display: inline-block; margin: 1rem 1rem 0 0; font-weight: 600; }
-.skill-section dt { margin-top: .65rem; font-weight: 600; }
-.skill-section dd { margin: 0; }
+.skill-keywords {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: .55rem .6rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.skill-keywords li {
+  padding: .18rem .65rem;
+  border: 1px solid var(--line);
+  border-radius: .2rem;
+  color: var(--ink);
+  font-size: .94rem;
+}
 @media (max-width: 760px) {
   .site-header nav { gap: 6px 16px; }
   .skill-section { grid-template-columns: 1fr; gap: 1rem; }
@@ -54,3 +65,64 @@
 .travel-map{margin:0}.travel-map img{width:100%;height:auto;border:1px solid var(--line);border-radius:4px}.travel-map figcaption{margin:.5rem 0 1.5rem;font-size:.8rem;color:var(--muted)}
 .travel-regions{grid-template-columns:2fr 1.4fr 1fr}.travel-regions h3{font-size:20px}.travel-regions p{color:var(--muted)}
 @media(max-width:620px){.header-inner{flex-wrap:wrap;gap:6px 18px}.site-header nav{flex-wrap:wrap;gap:2px 16px}.site-header nav a{white-space:nowrap}.rep-grid,.travel-regions{grid-template-columns:1fr;gap:1.5rem}.anime-rep ul{grid-template-columns:1fr 1fr;gap:.3rem 1rem}}
+
+.hero {
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 285px);
+  grid-template-areas: "intro portrait" "bio portrait";
+  align-items: center;
+  row-gap: 1.8rem;
+}
+.hero-main { grid-area: intro; }
+.hero-portrait {
+  grid-area: portrait;
+  width: 100%;
+  max-width: 285px;
+  height: auto;
+  justify-self: end;
+}
+.portrait-bio {
+  grid-area: bio;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+.portrait-bio h2 { font: 600 .83rem var(--sans); letter-spacing: normal; }
+.portrait-bio p { font-size: .85rem; color: var(--muted); margin-top: .35rem; }
+.travel-photos {
+  display: grid;
+  grid-template-columns: 2.25fr 1fr;
+  gap: clamp(.5rem, 1.4vw, 1.25rem);
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.travel-photos a { display: block; }
+.travel-photos img { width: 100%; height: auto; }
+.piano-performance {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--blue);
+  background: var(--pale);
+}
+.piano-performance p { font-size: .92rem; color: var(--muted); }
+.piano-performance video { width: 100%; max-width: 52rem; height: auto; display: block; margin-top: 1rem; }
+@media (max-width: 620px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(75px, 25%);
+    grid-template-areas: "eyebrow eyebrow" "name portrait" "subtitle portrait" "summary summary" "actions actions" "bio bio";
+    gap: .9rem 1rem;
+  }
+  .hero-main { display: contents; }
+  .hero-main > .eyebrow { grid-area: eyebrow; }
+  .hero-main h1 { grid-area: name; align-self: end; margin: 0; font-size: clamp(2.35rem, 8vw, 3rem); }
+  .hero-subtitle { grid-area: subtitle; align-self: start; font-size: 1.35rem; }
+  .hero-bio { grid-area: summary; margin-top: .5rem; }
+  .hero-actions { grid-area: actions; margin-top: .25rem; }
+  .portrait-bio { margin-top: .5rem; }
+  .travel-photos { grid-template-columns: 1fr 1fr; }
+  .travel-photos a:nth-child(1), .travel-photos a:nth-child(3) { grid-column: 1 / -1; }
+  .travel-photos a:nth-child(1) { grid-row: 1; }
+  .travel-photos a:nth-child(3) { grid-row: 3; }
+  .travel-photos a:nth-child(2), .travel-photos a:nth-child(4) { grid-row: 2; }
+}

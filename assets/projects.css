@@ -1,4 +1,5 @@
 /* Additional project figures preserve the complete scientific image. */
+.prose .fabrication-photo img { max-height: 36rem; object-fit: contain; }
 .project-copy .project-role, .project-meta .project-role {
   color: var(--blue);
   font-size: .84rem;

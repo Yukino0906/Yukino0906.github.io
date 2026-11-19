@@ -23,12 +23,9 @@
 
 <figure><a href="../../assets/cmos-platform-architecture.png" target="_blank" rel="noopener"><img src="../../assets/cmos-platform-architecture.png" alt="The measurement path from the Python host through instrument drivers, PXIe modules and a test fixture to the device." loading="lazy"></a><figcaption>My SURF poster maps a software test recipe onto the bench, through the module-specific cabling and adapter to the device contacts.</figcaption></figure>
 
-<h2 id="results">Device progress and measurement validation</h2>
+<h2 id="results">Current progress and next steps</h2>
 
 <p><strong>Completed device work.</strong> I have fabricated the RRAM devices on bare silicon and measured resistive switching. BEOL integration and network-level learning are the next stages of the project.</p>
-<p><strong>Earlier platform validation.</strong> Before device-specific measurements, I checked the SMU path with a nominal 220 Ω resistor. Ten repeated hardware readings clustered around 224 Ω. This check established a baseline for the measurement path’s repeatability and offset.</p>
-<figure><a href="../../assets/cmos-smu-validation.png" target="_blank" rel="noopener"><img src="../../assets/cmos-smu-validation.png" alt="Ten hardware resistance readings near 224 ohms, plotted against a nominal 220 ohm reference." loading="lazy"></a><figcaption>Ten experimental readings of a reference resistor during platform validation. The dashed line marks the nominal 220 Ω value.</figcaption></figure>
-
 <h3>Next step — BEOL integration on CMOS</h3>
 
 <p>I am preparing to build the RRAM devices on a CMOS test chip fabricated by my team. The chip provides pad access to individual NMOS and PMOS transistors. The plan is to use added top-metal routing to connect suitable transistors and RRAM devices into one-transistor–one-resistor (1T1R) cells. The routing design depends on confirming the pad assignments, existing connections and body-bias constraints, together with the process compatibility of the RRAM stack.</p>
